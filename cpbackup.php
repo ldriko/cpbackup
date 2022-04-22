@@ -145,7 +145,7 @@ class cPbackup
 
         $this->messages = [];
 
-        $customer_dir = './backups/' . $this->override_name !== null ? $this->override_name : $this->hostname;
+        $customer_dir = './backups/' . ($this->override_name !== null ? $this->override_name : $this->hostname);
         if (!file_exists($customer_dir)) {
             mkdir($customer_dir, 0777, true);
         }
