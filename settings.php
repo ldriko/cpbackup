@@ -6,6 +6,7 @@
 return [
     // omaticglobal.com
     [
+        'override_name' => 'omaticglobal.com',
         'hostname' => '45.143.81.85',
         'cpuser' => 'u1566419',
         'cppasswd' => 'amanmasukheaven',
@@ -50,6 +51,7 @@ return [
     ],
     [
         // aldrico.com
+        'override_name' => 'aldrico.com',
         'hostname' => '46.17.173.217',
         'cpuser' => 'n1097560',
         'cppasswd' => 'amanmasukheaven',
@@ -81,6 +83,7 @@ return [
     ],
     [
         // cognifa.com
+        'override_name' => 'cognifa.com',
         'hostname' => '45.143.81.42',
         'cpuser' => 'u1545808',
         'cppasswd' => 'amanmasukheaven',
@@ -107,7 +110,8 @@ return [
     ],
     [
         // prasastiindonesia.com
-        'hostname' => '156.67.209.250',
+        'override_name' => 'prasastiindonesia.com',
+        'hostname' => '156.67.209.33',
         'cpuser' => 'u9631600',
         'cppasswd' => 'amanmasukheaven',
         'port' => 2083,

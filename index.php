@@ -25,6 +25,7 @@ foreach ($server as $val) {
     /*
     * set minimum requirement parameter for homedir destination backup
     */
+    $cpbackup->override_name = $val['override_name'];
     $cpbackup->hostname = $val['hostname'];
     $cpbackup->cpuser = $val['cpuser'];
     $cpbackup->cppasswd = $val['cppasswd'];

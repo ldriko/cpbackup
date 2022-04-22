@@ -8,6 +8,7 @@ class cPbackup
 
     public $proxy = false;
     public $baseurl;
+    public $override_name;
     public $hostname;
     public $port = "2083";
     public $ssl = true;
@@ -61,7 +62,6 @@ class cPbackup
         curl_setopt($this->curl, CURLOPT_HEADER, 1);
         curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, 1);
         $this->result = curl_exec($this->curl);
-        file_put_contents('debug.txt', print_r($this->result, true));
         /*
          * get cPanel Security Token Access and themes that used from after login process above
          */
@@ -145,7 +145,7 @@ class cPbackup
 
         $this->messages = [];
 
-        $customer_dir = './backups/' . $this->hostname;
+        $customer_dir = './backups/' . $this->override_name !== null ? $this->override_name : $this->hostname;
         if (!file_exists($customer_dir)) {
             mkdir($customer_dir, 0777, true);
         }
