@@ -34,13 +34,18 @@ class cPbackup
     private $data;
     private $fields;
     public $useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36";
+    public $backupPath;
+
+    public function __construct($backupPath = null)
+    {
+        $this->backupPath = $backupPath ?? './backups';
+    }
 
     /*
      * Function for login into cPanel Account
      */
     private function cPlogin()
     {
-
         if ($this->ssl) {
             $this->base_url = "https://" . $this->hostname;
         } else {
@@ -75,7 +80,6 @@ class cPbackup
      */
     private function fullBackupProcess($token, $themes)
     {
-
         $this->bk_url = $this->base_url . ":" . $this->port . "/" . $token . "/frontend/" . $themes . "/backup/wizard-dofullbackup.html";
 
         /*
@@ -132,7 +136,6 @@ class cPbackup
      */
     public function fullBackup()
     {
-
         $this->cPlogin();
         $this->fullBackupProcess($this->token, $this->themes);
     }
@@ -142,10 +145,9 @@ class cPbackup
      */
     private function databaseBackupProcess($token, $themes)
     {
-
         $this->messages = [];
+        $customer_dir = $this->backupPath . '/' . ($this->override_name !== null ? $this->override_name : $this->hostname);
 
-        $customer_dir = './backups/' . ($this->override_name !== null ? $this->override_name : $this->hostname);
         if (!file_exists($customer_dir)) {
             mkdir($customer_dir, 0777, true);
         }
@@ -196,7 +198,6 @@ class cPbackup
      */
     private function getGzipFile($url_download, $filename, $path)
     {
-
         $fp = fopen($path . '/' . $filename, 'wb');
 
         curl_setopt($this->curl, CURLOPT_URL, $url_download);
@@ -212,7 +213,6 @@ class cPbackup
 
     public function formatSizeUnits($bytes)
     {
-
         if ($bytes >= 1073741824) {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
         } else if ($bytes >= 1048576) {
@@ -235,7 +235,6 @@ class cPbackup
      */
     public function databaseBackup()
     {
-
         $this->cPlogin();
         $this->databaseBackupProcess($this->token, $this->themes);
 
